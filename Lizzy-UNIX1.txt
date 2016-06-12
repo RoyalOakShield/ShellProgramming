@@ -1,0 +1,22 @@
+# read from board add to 2nd file
+# -n $Input not empty
+echo
+if [$# -eq 1 ]
+then
+        INPUT=Rexy
+        while [ $INPUT ]
+        do
+                echo "Please Enter Something you like:"
+                read INPUT
+                if [ -n $INPUT ]
+                then
+                        echo $INPUT >> $1
+                fi
+                #break
+        done
+        cat $1
+
+else
+        echo "Please enter 1 file name."
+        echo "Usage: exam1 filename"
+fi

@@ -1,0 +1,23 @@
+#list all who list then check if certain user has loggedin
+echo
+if [ $# -eq 1 ]
+then
+        while [ true ]
+        do
+                >tempfile$$
+                who > tempfile$$
+                temp=`cut -d " " -f 1 tempfile$$ `
+                echo $temp
+                user=`grep $1 tempfile$$`
+                if [ -n $user ]
+                then
+                        echo "user $1 is logon"
+                        break
+                else
+                        echo "waiting user $temp3 ..."
+                        sleep 5
+                fi
+        done
+else
+        echo "Usage:user_monitor username"
+fi

@@ -1,0 +1,46 @@
+#clear screen first
+#list info of file
+#check file size 5s compare with last time
+#if changed then cat newfile
+#if changed 2 times && not changed 10 times,clear and exit
+
+clear
+if [ -f $1 ]
+then
+        if [ $# -eq 1 ]
+        then
+                j=0
+                i=0
+                size1=`ls -l $1 | cut -c 41-43`
+                echo "$size1"
+                while [ true ]
+                do
+                        size2=`ls -l $1 | cut -c 41-43`
+                        if [ size1 -eq size2 ]
+                        then
+                                echo "Size not changed"
+                                let i=i+1
+echo "Size1 $size1"
+echo "Size2 $size2"
+                        else
+                                echo "file[$1] size changed"
+                                echo "Size: $size2"
+ 				let j=j+1
+echo "size1 $size1"
+echo "size2 $size2"
+                        fi
+                        if [ $i -eq 10 ] || [ $j -eq 2 ]
+                        then    break
+                        fi
+                        size1=$size2
+                        sleep 5
+                done
+        echo " Checking finished."
+        else
+                echo "Usage:ex3 file1 file2"
+                echo " File2 saves the present size of file1"
+        fi
+else
+        echo "$1 doesnt exist!"
+fi
+
